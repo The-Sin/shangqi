@@ -1,0 +1,30 @@
+<div class="container">
+ 
+    <div class="row">
+      <div class="input-group mb-3">
+  
+        <input [(ngModel)]="jingdu" type="text" class="form-control" placeholder="经度" aria-label="经度" aria-describedby="basic-addon1">
+  
+      </div>
+      <div class="input-group mb-3">
+  
+        <input [(ngModel)]="weidu" type="text" class="form-control" placeholder="纬度" aria-label="纬度" aria-describedby="basic-addon1">
+  
+      </div>
+      <div class="input-group mb-3">
+  
+        <input [(ngModel)]="city" type="text" class="form-control" placeholder="城市" aria-label="城市" aria-describedby="basic-addon1">
+  
+      </div>
+      <a  (click)="buildMap()"  class="btn  btn-primary"> baidu绘图 </a>
+      <a (click)="capture()"  class="btn  btn-primary"> 确定图像</a>
+      <div [hidden]="scString" id="allmap" style="width:100%; height:500px;">
+      </div>
+    </div>
+ 
+    <div class="row" *ngIf="scString">
+      <img [src]="scString">
+    </div>
+
+  
+  </div>

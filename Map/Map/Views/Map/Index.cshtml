@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+        body, html, #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
+    <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=RKjKU9A6FnoLPC5drt6tXQYc9N5e80Ql"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <title>单个标注点沿直线的轨迹运动</title>
+</head>
+<body>
+    <div id="allmap"></div>
+    @*<input type="button" id="btnLogin" value="get" />*@
+</body>
+</html>
+<script type="text/javascript">
+
+    //$(function () {
+    //    $("#btnLogin").on("click", function () {
+    //        $.ajax({
+    //            url: "/Map/coordinate",
+    //            type: "get",
+    //            //dataType:"json",
+    //            success: function (data) {
+    //                result = JSON.parse(data);
+    //                //var jsonobj = eval('(' + result + ')');
+    //                var latitude = new Array();
+    //                var longitude = new Array();
+    //                for (var i = 0; i < result.length; i++) {
+    //                    //alert(result[i].latitude, result[i].longitude);
+    //                    //latitude[i] = result[i].latitude;
+    //                    latitude[i] = (result.coordinate1)[i];
+    //                    longitude[i] = result[i].longitude;
+    //                    //alert(latitude, longitude);
+    //                }
+    //                alert(latitude);
+    //                alert(result.coordinate1)
+    //                //alert(result[i].latitude, result[i].longitude)
+    //            }
+    //        });
+        
+    //    });
+    //});
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    map.centerAndZoom(new BMap.Point(113.906835, 22.525275), 15);
+    //var myP1 = new BMap.Point(113.907015, 22.526652); //起点
+    //var myP2 = new BMap.Point(113.908901, 22.524874); //终点
+    var myIcon = new BMap.Icon("/img/1.png", new BMap.Size(32,32), { //小车图片
+        //offset: new BMap.Size(0, -5),    //相当于CSS精灵
+        imageOffset: new BMap.Size(0, 0) //图片的偏移量。为了是图片底部中心对准坐标点。
+    });
+    var driving = new BMap.DrivingRoute(map, {
+        renderOptions: {
+            map: map,
+            autoViewport: true
+        }
+    }); //驾车实例
+
+    //var pts = [
+    //    new BMap.Point(113.907015, 22.526652),
+    //    new BMap.Point(113.907215, 22.526452),
+    //    new BMap.Point(113.907415, 22.526252),
+    //    new BMap.Point(113.907615, 22.526052),
+    //    new BMap.Point(113.907815, 22.525852),
+    //    new BMap.Point(113.908015, 22.525652),
+    //    new BMap.Point(113.908215, 22.525452),
+    //    new BMap.Point(113.908415, 22.525252),
+    //    new BMap.Point(113.908615, 22.525052),
+    //    new BMap.Point(113.908901, 22.524874)
+    //];
+    var result
+    var pts = new Array();
+    $(document).ready(function () {
+        $.ajax({
+            url: "/Map/coordinate",
+            type: "get",
+            //dataType:"json",
+            success: function (data) {
+                result = JSON.parse(data);
+                var latitude = new Array();
+                var longitude = new Array();
+                for (var i = 0; i < result.length; i++) {
+                    latitude[i] = result[i].latitude;;
+                    longitude[i] = result[i].longitude;
+                    pts[i] = new BMap.Point(latitude[i], longitude[i]);
+                }
+                //alert(pts.length)
+                run();
+            }
+        });
+        //$.ajax({
+        //    url: "/Map/coordinate2",
+        //    type: "get",
+        //    //dataType:"json",
+        //    success: function (data) {
+        //        result = JSON.parse(data);
+        //        var latitude = new Array();
+        //        var longitude = new Array();
+        //        for (var j = 0; j < result.length; j++) {
+        //            latitude[j] = result[j].latitude;;
+        //            longitude[j] = result[j].longitude;
+        //            pts[j] = new BMap.Pojnt(latitude[j], longitude[j]);
+        //        }
+        //        //alert(pts.length)
+        //        run();
+        //    }
+        //});
+        
+    });
+    function run() {
+        var linePoints = pts;//画线
+        polyline = new BMap.Polyline(linePoints, {
+            strokeColor: "red",
+            strokeWeight: 2,
+            strokeOpacity: 0.5
+        });
+        map.addOverlay(polyline);
+
+        setTimeout(function () {
+            map.setViewport(pts);
+        },
+            100);
+        //-----画线
+
+        //车辆行驶
+        var paths = pts.length; //获得有几个点
+        var carMk = new BMap.Marker(pts[0], {
+            icon: myIcon
+        });
+        map.addOverlay(carMk);
+        i = 0;
+        function resetMkPoint(i) {
+            carMk.setPosition(pts[i]);
+            if (i < paths) {
+                setTimeout(function () {
+                    i++;
+                    resetMkPoint(i);
+                },
+                    200);
+            }
+        }
+        setTimeout(function () {
+            resetMkPoint(0);
+        },
+            200)
+    }
+    
+
+    
+
+</script>

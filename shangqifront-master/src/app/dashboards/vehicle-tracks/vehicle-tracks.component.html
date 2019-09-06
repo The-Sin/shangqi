@@ -1,0 +1,44 @@
+<p>
+  vehicle-tracks works!
+</p>
+<div class="container">
+  <div class="row">
+    <div id="map">
+
+    </div>
+  </div>
+<div class="row" >
+  <h2>
+    某車XXX的軌跡節點
+    本車路徑為白色
+    其他車紅色
+    選中的為黃色
+  </h2>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th>節點ID</th>
+        <th>start起點</th>
+        <th>end重點坐標</th>
+        <th *ngIf="car.isMain">Add 副車 Track </th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tracks; let i = index"  (click)="select($event, item)"  [ngClass]="{'active':selected && item.id == selected.id}">
+        <td><a routerLink="/vehicle-edit/{{item.id}}" routerLinkActive="active"> {{item.carId}}</a></td>
+        <td>x:{{item.start.x}} y:{{item.start.y}}</td>
+        <td>x:{{item.end.x}} y:{{item.end.y}}</td>
+        <td *ngIf="car.isMain" ><a routerLink="/vehicle-tracks-add/" routerLinkActive="active" class="btn  btn-primary">觸發新副車的軌跡</a>
+        </td>
+        
+        
+      </tr>
+      
+    </tbody>
+  </table>
+  
+  <div> <a routerLink="/dashboard/vehicle-tracks-edit/{{carId}}" routerLinkActive="active" class="btn  btn-primary">Add new track</a></div>
+</div>
+
+</div>

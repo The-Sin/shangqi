@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row">
+  
+      <div id="demo"></div>
+      
+    </div>
+    <div class="row">
+        <a routerLink="/dashboard/baidu-map" > Baidu Map</a>
+    </div>
+  
+  
+    <div class="row">
+      <h2>
+        所有(車的)軌跡表
+        主車路徑為白色
+        副車紅色
+        選中的為黃色
+      </h2>
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>軌跡ID</th>
+            <th>車名</th>
+            <th>是否主車</th>
+            <!-- <th>Add tracks</th> -->
+            <th>Delete</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dashboard2; let i = index" (click)="select($event, item)" [ngClass]="{'active':selected && item.id == selected.id}">
+            <td><a> {{item.id}}</a></td>
+            <td>xxx{{i}}</td>
+            <td>{{item.isMain}}</td>
+  
+            <td><button type="button" class="btn  btn-primary">Delete</button></td>
+            <td><a routerLink="/dashboard/vehicle-tracks/{{item.id}}" routerLinkActive="active" class="btn  btn-primary">编辑軌跡</a></td>
+  
+          </tr>
+  
+        </tbody>
+      </table>
+  
+    </div>
+  </div>

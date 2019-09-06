@@ -1,0 +1,36 @@
+
+<div>
+    <button type="button" class="btn  btn-primary">Create New</button>
+    <button type="button" class="btn  btn-primary">Click N Connect</button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Main</th>
+        <th>battery</th>
+        <th>Network</th>
+        <th>Status</th>
+        <th>Load</th>
+        <!-- <th>Add tracks</th> -->
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dashboard1; let i = index">
+        <td><a routerLink="/dashboard/vehicle-edit/{{item.id}}" routerLinkActive="active"> {{item.id}}</a></td>
+        <td>{{item.isMain}}</td>
+        <td><i class="fa fa-battery-half"></i></td>
+        <td>{{item.network}}</td>
+        <td> <i style="color: red" class="fa fa-car"></i></td>
+        <td><button type="button" class="btn  btn-primary">Load</button>
+        </td>
+        <!-- <td><a routerLink="/vehicle-tracks" class="btn  btn-primary">添加軌跡</a>
+        </td> -->
+        <td><button type="button" class="btn  btn-primary">Delete</button></td>
+        
+      </tr>
+      
+    </tbody>
+  </table>
+  

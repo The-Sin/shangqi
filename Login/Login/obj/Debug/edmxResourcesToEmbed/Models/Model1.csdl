@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBUserModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="U_NO" />
+    </Key>
+    <Property Name="U_NO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="U_JobNO" Type="Int32" />
+    <Property Name="U_LoginName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="U_Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="U_Dept" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="U_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="U_Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="U_Age" Type="Int32" />
+    <Property Name="U_Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="U_Role" Type="Int32" />
+  </EntityType>
+  <EntityType Name="UserPower">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="Int32" Nullable="false" />
+    <Property Name="P_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="U_Role" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="DBUserEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+    <EntitySet Name="UserPower" EntityType="Self.UserPower" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBUserModelStoreContainer" CdmEntityContainer="DBUserEntities">
+    <EntitySetMapping Name="UserInfo">
+      <EntityTypeMapping TypeName="DBUserModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="U_NO" ColumnName="U_NO" />
+          <ScalarProperty Name="U_JobNO" ColumnName="U_JobNO" />
+          <ScalarProperty Name="U_LoginName" ColumnName="U_LoginName" />
+          <ScalarProperty Name="U_Password" ColumnName="U_Password" />
+          <ScalarProperty Name="U_Dept" ColumnName="U_Dept" />
+          <ScalarProperty Name="U_Name" ColumnName="U_Name" />
+          <ScalarProperty Name="U_Sex" ColumnName="U_Sex" />
+          <ScalarProperty Name="U_Age" ColumnName="U_Age" />
+          <ScalarProperty Name="U_Telephone" ColumnName="U_Telephone" />
+          <ScalarProperty Name="U_Role" ColumnName="U_Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserPower">
+      <EntityTypeMapping TypeName="DBUserModel.UserPower">
+        <MappingFragment StoreEntitySet="UserPower">
+          <ScalarProperty Name="P_ID" ColumnName="P_ID" />
+          <ScalarProperty Name="P_Name" ColumnName="P_Name" />
+          <ScalarProperty Name="U_Role" ColumnName="U_Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

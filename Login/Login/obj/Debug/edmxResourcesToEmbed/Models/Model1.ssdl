@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBUserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="U_NO" />
+    </Key>
+    <Property Name="U_NO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="U_JobNO" Type="int" />
+    <Property Name="U_LoginName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="U_Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="U_Dept" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Sex" Type="nvarchar" MaxLength="10" />
+    <Property Name="U_Age" Type="int" />
+    <Property Name="U_Telephone" Type="nvarchar" MaxLength="50" />
+    <Property Name="U_Role" Type="int" />
+  </EntityType>
+  <EntityType Name="UserPower">
+    <Key>
+      <PropertyRef Name="P_ID" />
+    </Key>
+    <Property Name="P_ID" Type="int" Nullable="false" />
+    <Property Name="P_Name" Type="nvarchar" MaxLength="20" />
+    <Property Name="U_Role" Type="int" />
+  </EntityType>
+  <EntityContainer Name="DBUserModelStoreContainer">
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserPower" EntityType="Self.UserPower" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
